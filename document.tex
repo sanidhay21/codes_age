@@ -1,0 +1,250 @@
+% !TEX spellcheck = en_US
+% !TEX spellcheck = LaTeX
+%\documentclass[journal,draftcls,onecolumn,11pt,twoside]{IEEEtranTCOM}
+\documentclass[11pt, conference, english]{IEEEtran}
+%\documentclass[journal,twocolumn,10pt]{IEEEtranTCOM}
+\normalsize
+\usepackage{lipsum, babel}
+%\IEEEoverridecommandlockouts
+
+%\input{header}
+\usepackage[cmex10]{amsmath}
+\usepackage{%
+	amsfonts,%
+	amsmath,%
+	amssymb,%
+	amsthm,%
+	%babel,%
+	bbm,%
+	cite,%
+	float,%
+	%enumitem,%
+	etoolbox,%
+	mathrsfs,%
+	mathtools,%
+	multirow,%
+	pgf,%
+	pgfplots,%
+	subfigure,%
+	tikz,%
+}
+\usepackage[normalem]{ulem}
+%\usepackage[vmargin=1.129999cm,hmargin=1cm,head=16pt,includeheadfoot]{geometry}
+\usepackage{fancyhdr}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\slshape\rightmark}
+%\fancyhead[RE]{\slshape\leftmark}
+\pagestyle{fancy}
+
+%\tikzset{
+%    -|/.style={to path={-| (\tikztotarget)}},
+%    |-/.style={to path={|- (\tikztotarget)}},
+%}
+%\pgfkeys{/pgf/number format/.cd,fixed,precision=3}
+%\pgfplotsset{
+%	compat=1.3, 
+%	every axis/.append style={scale only axis, axis on top,
+%		height=4.25cm, width=4.5cm, xmin=-1, xmax=240,
+%	}
+%}
+\usepgflibrary{shapes}
+\usetikzlibrary{%
+	arrows,positioning, shapes.symbols,shapes.callouts,patterns
+}
+%\usetikzlibrary{arrows.meta,chains,positioning}
+\interdisplaylinepenalty=2500
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}%[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{assum}[thm]{Assumptions}
+\newtheorem{axiom}[thm]{Axiom}
+
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+\newtheorem{fact}{Fact}
+
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\EQ}[1]{\begin{equation*}#1\end{equation*}}
+\newcommand{\case}[1]{\begin{cases}#1\end{cases}}
+\newcommand{\eqn}[1]{\begin{align}#1\end{align}}
+\newcommand{\EQN}[1]{\begin{equation}#1\end{equation}}
+\newcommand{\meq}[2]{\begin{xalignat*}{#1}#2\end{xalignat*}}
+\newcommand{\meqn}[2]{\begin{xalignat}{#1}#2\end{xalignat}}
+\newcommand{\ieeeproof}[1]{\begin{IEEEproof}#1\end{IEEEproof}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\indep}{\!\perp\!\!\!\perp}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\newcommand\numberthis{\addtocounter{align}{1}\tag{\thealign}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+%\newcommand{\mathbb{P}}{\mathbb{P}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\B}{\mathscr{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\T}{\mathscr{T}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\sF}{\mathscr{F}}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\le}{\leqslant}
+%\newcommand{\ba}{\eq{}
+%\newcommand{\ea}{}}
+%\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\title{Zero-Shot Learning Using Auto-Encoder Architecture For Semantic Feature Embedding}
+\author{
+	\IEEEauthorblockN{Sanidhay Bhambay, Anurag Gupta, Dinesh R}
+	\IEEEauthorblockA{Samsung Electro-Mechanics Software India Bangalore Pvt Limited\\
+		\{sanidhay.bhambay,anurag.gupta,dimesh.ramegowda\}@samsung.com}% <-this % stops a space
+}
+
+
+\begin{document}
+%\lipsum
+\markboth{}{SAMSUNG Best Paper Award 2018}
+
+	\maketitle 
+	\begin{abstract} 
+		Zero-shot learning consists of classifying the objects of unseen classes which were not present during training. In this, objects of each class are first map to the semantic feature embedding space. Many sophisticated approaches have been studied in literature for doing this mapping. We are providing an unsupervised way of learning this mapping using auto-encoder architecture in deep learning. Further, for each class, we are converting the class label into a vector containing the set of attributes describing fundamental properties required for the identification of particular class. In last, for assigning the class label for seen and unseen classes in test dataset we are using combination of clustering and nearest neighbor algorithms from machine learning. Clustering is used to avoid brute-force approach for comparing the semantic feature embedding of an object with all attribute vectors of class labels. This approach shown to be outperform the existing comparison methods like $1$-Nearest Neighbor.
+		
+		
+	\end{abstract}
+	\begin{IEEEkeywords}
+		Deep learning, Auto-encoder.
+	\end{IEEEkeywords}
+	\section{Introduction}
+	From past few years, deep learning gains a lot of attention especially in tasks related to the automatic classification of objects, image caption, and automatic machine translation. Training a good deep learning model requires sufficient amount of data. Especially, while dealing with classification problems where we require label data for each class. In practice, it is not always feasible to get labeled data for each class. Moreover, new classes emerge over time, the training dataset should be revised and the model should be re-trained. Zero-shot learning is a type of learning to deal with such scenarios and first introduced in~\cite{palatucci2009zero}. This type of learning is able to classify the classes, which are not seen during the training phase of the model.
+	
+	Zero-shot learning is typically a two phase process which are described below,
+	\begin{enumerate}
+		\item Training: In training phase, model learns the mapping of a class object into semantic feature embedding space.
+		\item Assigning Class Label: The label is assigned based on the object semantic embedding and the attribute vector of class.
+	\end{enumerate}
+	Several recent papers have proposed methods for mapping objects particularly images into semantic embedding space~\cite{frome2013devise,lake2011one}. In contrast, we are learning this mapping in unsupervised way using auto-encoder.
+	\subsection{Related Work}
+	In testing phase for an unseen class
+	object,  the semantic vector is determined by learned mapping and the nearest
+	neighbor class is assigned~\cite{wang2016relational,socher2013zero}. The most known
+	approach in zero-shot learning for learning this mapping, is by learning a linear compatibility between the visual and semantic space~\cite{frome2013devise}.
+	\subsection{Main Contribution}
+	We consider the situation where unseen classes are present in test dataset. Zero-shot learning is the way to deal such practical and potential situation. We are providing a novel unsupervised way of learning object mapping of a particular class to semantic feature embedding space. From deep learning, we are using auto-encoder architecture to learn such mapping. Finally, for assigning class label we are using combination of sophisticated machine learning algorithm called clustering and nearest neighbor which compares the semantic embedding of an object to the attribute vector of the class. 
+	\section{System Architecture}
+	In this section, we are going to explain each component of the system architecture shown in Fig.~\ref{Fig:SystemModel}. The model of zero-short classifier $H$ first maps the input space $I$ into the semantic feature space $F^d$ of $d$ dimensions, using mapping $f$. Further, it  maps  the semantic feature embedding to the class label $Y$ using mapping $g$ i.e.,
+	$H=g(f(.)),
+		f: I \rightarrow F^d,
+		g: F^d \rightarrow Y.$
+	\begin{figure}[h!]
+		\centering
+		\scalebox{.5}{\input{Figures/SystemModel}}
+		\caption{System model used for zero-shot learning.}
+		\label{Fig:SystemModel}
+	\end{figure}
+	\subsection{Auto-Encoder}
+	Auto-encoder used for mapping input object to the semantic feature space of $d$ dimensions is shown in Fig.~\ref{Fig:SystemModel2}. This is an unsupervised way of learning weights of the network. Auto-encoder tries to learn an approximation to the input object, so as to output $\hat{M}_j$ which is very much similar to $M_j$.  The cost function used to get the optimal weights of network is given by,  \eq{J=\sum\limits_{j=1}^{L} Loss\{M_j,\hat{M}_j\},} 
+	where $L$ is the number of data points in the training dataset. The semantic feature embedding $X_j$, for input $M_j$, is obtained as an output of the encoder.
+	
+	\subsubsection{Encoder}
+	An encoder converts the input object into better encoded semantic feature representation $X_j$.
+	We have designed the encoder using convolution neural network (CNN).
+	The feature representation $X_j$ is the encoder's last layer output. Instead of classifying a data, it tries to learn the better way to represent a data with unsupervised way of learning such as dimensionality reduction.
+	
+	\subsubsection{Semantic Feature Embedding}
+	A semantic feature embedding space $F^d$ of $d$ dimensions is a metric space, in which each of the $d$ dimensions represent the relevant feature of input object.
+
+	
+	
+	\begin{figure}[h!]
+		\centering
+		\scalebox{.5}{\input{Figures/SystemModel2}}
+		\caption{Architecture of auto-encoder}
+		\label{Fig:SystemModel2}
+	\end{figure}
+		\subsubsection{Decoder}
+		%Feature vectors are encoded or condensed representations of the input data. 
+		The decoder actually learns how to decode the  feature $X_j$ in order to find the closest estimate $\hat{M}_j$ of the input object $M_j$.
+	%These vectors are the inputs as they make their way back. 
+		The number of output neurons in particular hidden layer of decoder is same as the number of input neurons in corresponding encoder hidden layer. Further, the decoder works in a reverse way that is every layer of the encoder can be represented as an inverse layer in the decoder.
+		Example, inverse of down sampling layer is up sampling layer. 
+		% way of encoder and tries to reconstruct input data, from the feature vectors.
+	%A decoder is the part that tries to reconstruct the original data.
+	% It requires a second feed-forward network, along with back propagation.
+	\subsection{Label Mapping}
+	Each class label is first manually converted into the vector $\{\alpha_j: j\in (1,\dots,\mathbf{card}(Y))\}$,
+	containing the set of attributes describing fundamental properties needed for class identification. The attribute vector $\alpha_j$ of the class label $j$ is of dimension $d$. After clustering, we are employing nearest neighbor or Euclidean distance metric for comparing class attribute vector with the semantic feature vector $X_j$ of the object. A class label $y\in Y$ is assigned to an input object as,
+	\eq{y=\argmin_l \norm{X_j-\alpha_l}_2.}
+	\section{Benefits of Zero-Shot Learning}
+In machine learning, there are various classical classification algorithms like logistic regression, SVM, neural networks etc. During the training phase, these algorithms require label data for each class. Further, they are unable to assign the correct class label of unseen classes present in the test dataset.
+Zero-shot learning overcomes the drawbacks present in above machine learning approaches, by correctly assign the labels of unseen classes in test dataset.
+	% to the test data of new class.
+	\section{Conclusion}
+	We considered a problem of zero-shot learning for classifying objects of unseen classes present in the test dataset. Using auto-encoder architecture from deep learning, we are able to map objects of each class to corresponding semantic feature embedding. Finally, we are using clustering and nearest neighbor algorithm for assigning class labels.
+	
+	For application respect, there are various ongoing projects at Samsung, where one needs to classify images depending on the type of defects available in image data. As of now, one needs to re-train their model, whenever Samsung obtains images for the new unseen classes. Zero-shot learning is a useful technique to reduce the manual efforts require for re-training. One just needs to obtain the label attribute vectors for images of unseen classes. 
+	%Feature representations can be created for such data, with pre-trained model and ultimately label mapping can help to correctly classify such data.
+	
+	
+	
+	
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\bibliographystyle{IEEEtran}
+	\bibliography{document}
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\onecolumn
+\section{Evaluation Criteria and Self Evaluation}
+\begin{enumerate}
+	\item \textbf{Technological Importance} (30\%)\\
+	%1. Technological Importance (30%)
+	Is the work about the world's first or an advanced technology?\\
+	Does the paper explain and discuss outstanding results? \\
+	\textit{\blue{Yes, the paper discusses about a quite frequent issue faced in learning community.}}
+	
+	\item \textbf{Originality} (30\%)\\
+	Does the paper suggest an interesting and creative idea?\\
+	Does the paper point out differences or new approaches from related researches?\\
+	\textit{\blue{In this paper we have novelty in terms of new system architecture for zero-shot learning.}}
+	\item \textbf{Evidences} (30\%)\\
+	Does the paper back up a theoretical idea, conclusion, analysis in the literature with sufficient experimental evidences?\\
+	Are the conclusions logically consistent and do you logically integrate the issue with the conclusion?\\
+	\textit{\blue{Yes, we have sufficient experimental evidence and theoretical ideas to prove that our architecture is reasonably good as compared to existing work.}}
+	\item \textbf{Contribution and Impact} (10\%)\\
+	Does the conclusions, implications, or outcomes of the paper make some contribution to either the application or the solution itself in the relevant field?\\
+	\textit{\blue{Our solution is very much relevant to the problem related to classification and many supervised learning cases.}}
+	
+	
+	
+\end{enumerate}
+%\lipsum[3]	
+%\newpage
+%\section{Evaluation Criteria & Self Evaluation}
+\end{document}\grid
+
+
+
+
+%1. Paragraph A (Related Work) is isolated; reading flow is abrupt
+
+%
+%3. Also, it could be worth to mention about the possible application of ZSL and also, it would be great if we can map application of ZSL for SEMCO/Samsung problems.
+%
+%4. Highlight the benefit of ZSL over other ML techniques.
+
