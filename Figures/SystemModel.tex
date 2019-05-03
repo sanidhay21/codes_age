@@ -1,0 +1,27 @@
+\begin{tikzpicture}[
+font=\large,
+draw=black, line width=1pt, >=stealth', node distance=9em,auto,>=latex',
+pre/.style={<-,shorten >= 1pt,>=stealth',thick},
+post/.style={->,shorten >=1pt,>=stealth',thick},
+endState/.style={circle, inner sep=0pt, minimum size=3em},
+channel/.style={rectangle,draw,rounded corners, inner sep=0pt, minimum height=6em, minimum width=6em},
+intState/.style={rectangle,draw,rounded corners, inner sep=0pt, minimum height=4em, minimum width=8em},
+L/.style = {draw, rounded corners},
+]
+\node [endState] (source) {Object};
+\node [intState, right of=source] (encoder) {Auto-Encoder}
+edge[pre] node[midway,above]{$I$} (source);
+\node [intState, right of=encoder,xshift = 2cm](channel) {Label Mapping}
+edge[pre] node[midway, above] {$X\in F^d$} (encoder);
+%edge[pre,|-] node [midway,above] {$X^{n}_j$} (encoder);
+%\draw[L]    (encoder) -| node[pos=0.75] {$X^{n}_{j} = (X_{(j-1)n+1}, \dots, X_{jn})$} (channel);
+
+%\node [intState,  right of=channel,xshift=2cm] (decoder) {Decoder}
+%edge[pre] node[midway, above] {$Y_{j}^n$} (channel);
+
+
+\node [endState, right of=channel] (monitor) {Class Label}
+edge[pre] node[midway,above]{$ Y$} (channel);
+
+
+\end{tikzpicture}

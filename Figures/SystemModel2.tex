@@ -1,0 +1,26 @@
+\begin{tikzpicture}[
+font=\large,
+draw=black, line width=1pt, >=stealth', node distance=9em,auto,>=latex',
+pre/.style={<-,shorten >= 3pt,>=stealth',thick},
+post/.style={->,shorten >=1pt,>=stealth',thick},
+endState/.style={circle, inner sep=0pt, minimum size=3em},
+channel/.style={rectangle,draw,rounded corners, inner sep=0pt, minimum height=6em, minimum width=6em},
+intState/.style={rectangle,draw,rounded corners, inner sep=0pt, minimum height=4em, minimum width=8em},
+L/.style = {draw, rounded corners},
+]
+\node [endState] (source) {Original i/p};
+\node [intState, right of=source] (encoder) {Encoder}
+edge[pre] node[midway,above]{$M_j$} (source);
+\node [intState,  right of=encoder](channel) {Feature $``X_j"$}
+%edge[pre,|-] node [midway,above] {$X^{n}_j$} (encoder);
+edge[pre] node[midway,above]{} (encoder);
+
+\node [intState,  right of=channel] (decoder) {Decoder}
+
+edge[pre] node[midway,above]{} (channel);	 
+
+\node [endState, right of=decoder] (monitor) {Re-Cons i/p}
+edge[pre] node[midway,above]{$\hat{M}_j$} (decoder);
+
+
+\end{tikzpicture}
