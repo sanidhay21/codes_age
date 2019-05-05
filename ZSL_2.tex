@@ -166,12 +166,12 @@ approach in ZSL for learning this mapping, is by learning a linear compatibility
 	
 	\subsection{Training Phase}
 	In this work we are doing sequential training with GAN followed by dense neural network as shown in Fig.\ref{Fig:SystemModel}. Next, we are going to explain the each component of training phase in detail.
-		\begin{figure}[h!]
-			\centering
-			\scalebox{0.4}{\includegraphics{Figures/Untitled}}
-			\caption{System model used for zero-shot learning.}
-			\label{Fig:SystemModel}
-		\end{figure}
+%		\begin{figure}[h!]
+%			\centering
+%			\scalebox{0.4}{\includegraphics{Figures/Untitled}}
+%			\caption{System model used for zero-shot learning.}
+%			\label{Fig:SystemModel}
+%		\end{figure}
 	\subsubsection{Generative Adversarial Network } GAN is used to generate the feature instances of unseen classes. For training GAN we are using only training set $M$ of seen classes. The aim is to learn the generator $G:Z \times C \rightarrow \chi$, where $Z$ is coming from random Gaussian noise. Once the generator learn to generate the feature instance $\bar{x}$ of seen classes, it can also generate the feature instances for unseen classes by passing corresponding class embedding $c(u)$ of unseen classes. In GAN we are going to optimize the following loss function of two player game,
 	\eq{\min_G \max_D Loss_{GAN}&=\E [\log D(x,c(y))]\\
 		&+\E[\log(1-D(\bar{x},c(y)))],}
@@ -179,8 +179,9 @@ approach in ZSL for learning this mapping, is by learning a linear compatibility
 	\subsubsection{Dense Network}
 	 Once the GAN is trained on set $M$, we can generate now the feature instance for unseen classes. Now we have synthetic data for unseen classes denoted by 
 	$U=\{(\bar{x},u,c(u))\}$. Finally we have feature instances for seen and unseen classes without using images of unseen classes. Next step is to learn the mapping from input feature space to corresponding label space. For this we are using dense neural network with loss function,
-	\eq{Loss_{dense}=\norm{\hat{c}(y)-c(y)}_2,} 
-	where $\hat{c}(y)$ is the estimate of $c(y)$ at the output layer of dense network. With this learned dense network we are actually try to find the connection between to two different spaces which is further helpful in assigning labels during test phase.
+	$Loss_{dense}=\norm{\hat{c}(y)-c(y)}_2,$
+	where $\hat{c}(y)$ is the estimate of $c(y)$ at the output layer of dense network. 
+	%With this learned dense network we are actually try to find the connection between to two different spaces which is further helpful in assigning labels during test phase.
 	
 	\section{Testing Phase for ZSL}
 	During test phase, first the feature is extracted using pre-trained auto encoder for any query image from unseen classes. Then the extracted feature for this query image is given as an input to dense network. The output of dense network is the class embedding for input query image. In last  nearest neighbor is used between class embedding of query image and class embeddings of all unseen classes. Every class embedding in label space has associated label with that. Therefore, corresponding label is assigned after the search of nearest neighbor.
