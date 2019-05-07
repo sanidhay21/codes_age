@@ -123,7 +123,7 @@
 
 	\maketitle 
 	\begin{abstract}
-		Inspired from human ability to recognize the unseen objects by just knowing the limited information about it. In learning theory this type of problem is modeled as ``Zero-Shot Learning" (ZSL). In this work we are providing the novel architecture using generative adversarial network (GAN) and dense network to train ZSL model using side information for unseen classes. Our method is able to generate the training instances for unseen classes using GAN by providing the class embedding as an side information input to the generator in GAN. Finally, we have performed our experiments on \textit{Multi Layer Ceramic Captitor} (MLCC) data set to validate our architecture.
+		Inspired from human ability to recognize the unseen objects by just knowing the limited information about it. In learning theory this type of problem is modeled as ``Zero-Shot Learning" (ZSL). In this work we are providing the novel architecture using generative adversarial network (GAN) and dense network to train ZSL model using side information for unseen classes. Our method is able to generate the training instances for unseen classes using GAN by providing the class embedding as an side information input to the generator in GAN. Finally, we have performed our experiments on \textit{Multi Layer Ceramic Capacitor} (MLCC) data set to validate our architecture.
 		
 		
 		
@@ -144,17 +144,17 @@
 	
 	In ZSL we will be able to label the instances of the classes which were not present during training time. For this each seen/unseen class label is first map to the semantic label space. In natural language processing (NLP) there are techniques to do this like "Skip-Gram Method" or "Google Word2vec". We are using word2vec and CNN-RNN~\cite{scott2016CVPR} based representation to  map each class label to corresponding label space. The main objective in ZSL is to learn the mapping from input space to label space. During the training phase of ZSL, first we have to map the instances of each seen classes to semantic feature space and then map the semantic feature space to label space. The mapping from feature space to label space can be obtained by training a dense neural network.
 	
-	In this work we first generate the ferature instances for each unseen classes using class embedding from label space as an input to generator in GAN. Remember that during training we are not using any available  data of unseen classes. In contrast, we are generating feature instance of unseen classes using side information from label space. Therefore, our trained model for ZSL is not biased towards only seen classes.
+	In this work we first generate the feature instances for each unseen classes using class embedding from label space as an input to generator in GAN. Remember that during training we are not using any available  data of unseen classes. In contrast, we are generating feature instance of unseen classes using side information from label space. Therefore, our trained model for ZSL is not biased towards only seen classes.
 	% before mapping input to corresponding feature space
 	
 	Several prior work on ZSL is based on learning the mapping from input space to label space and then apply nearest neighbor method to assign the label during test phase~\cite{frome2013devise,lake2011one}. 
-	\subsection{Related Work}
-In testing phase for an unseen class
-object,  the semantic vector is determined by learned mapping and the nearest
-neighbor class is assigned~\cite{wang2016relational,socher2013zero}. The most known
-approach in ZSL for learning this mapping, is by learning a linear compatibility between the visual and semantic space~\cite{frome2013devise}.
+%	\subsection{Related Work}
+%In testing phase for an unseen class
+%object,  the semantic vector is determined by learned mapping and the nearest
+%neighbor class is assigned~\cite{wang2016relational,socher2013zero}. The most known
+%approach in ZSL for learning this mapping, is by learning a linear compatibility between the visual and semantic space~\cite{frome2013devise}.
 	\subsection{Main Contribution}
-	We want to mimic the ability of human to identify unseen object in convolution neural network using ZSL. Apart from prior work which mostly consider the case of learning mapping from input space to label space. In this work we are providing our training model with some side information from label space for unseen classes. For this we are using GAN architecture to generate training instances for unseen classes. In this way we are forcing our model to not biased towards seen classes. Also, we are using Word2vec and CNN-RNN based representaion for class embedding. Finally, we have performed experiments on MLCC data set for both type of class embedding representation.
+	We want to mimic the ability of human to identify unseen object in convolution neural network using ZSL. Apart from prior work which mostly consider the case of learning mapping from input space to label space. In this work we are providing our training model with some side information from label space for unseen classes. For this we are using GAN architecture to generate training instances for unseen classes. In this way we are forcing our model to not biased towards seen classes. Also, we are using Word2vec and CNN-RNN based representation for class embedding. Finally, we have performed experiments on MLCC data set for both type of class embedding representation.
 %	We consider the situation where unseen classes are present in test dataset. Zero-shot learning is the way to deal such practical and potential situation. We are providing a novel unsupervised way of learning object mapping of a particular class to semantic feature embedding space. From deep learning, we are using auto-encoder architecture to learn such mapping. Finally, for assigning class label we are using combination of sophisticated machine learning algorithm called clustering and nearest neighbor which compares the semantic embedding of an object to the attribute vector of the class. 
 	\section{Training Phase and Notations}
 	In this section, we are going to explain the architecture used during training phase of ZSL and some notations which we are using through out the paper. 
@@ -165,13 +165,13 @@ approach in ZSL for learning this mapping, is by learning a linear compatibility
 	 
 	
 	\subsection{Training Phase}
-	In this work we are doing sequential training with GAN followed by dense neural network as shown in Fig.\ref{Fig:SystemModel}. Next, we are going to explain the each component of training phase in detail.
-%		\begin{figure}[h!]
-%			\centering
-%			\scalebox{0.4}{\includegraphics{Figures/Untitled}}
-%			\caption{System model used for zero-shot learning.}
-%			\label{Fig:SystemModel}
-%		\end{figure}
+	In this work we are doing sequential training with GAN followed by dense neural network. Next, we are going to explain the each component of training phase in detail.
+		\begin{figure}[h!]
+			\centering
+			\scalebox{0.6}{\includegraphics{Figures/Untitled}}
+			\caption{System model used for zero-shot learning.}
+			\label{Fig:SystemModel}
+		\end{figure}
 	\subsubsection{Generative Adversarial Network } GAN is used to generate the feature instances of unseen classes. For training GAN we are using only training set $M$ of seen classes. The aim is to learn the generator $G:Z \times C \rightarrow \chi$, where $Z$ is coming from random Gaussian noise. Once the generator learn to generate the feature instance $\bar{x}$ of seen classes, it can also generate the feature instances for unseen classes by passing corresponding class embedding $c(u)$ of unseen classes. In GAN we are going to optimize the following loss function of two player game,
 	\eq{\min_G \max_D Loss_{GAN}&=\E [\log D(x,c(y))]\\
 		&+\E[\log(1-D(\bar{x},c(y)))],}
@@ -179,7 +179,7 @@ approach in ZSL for learning this mapping, is by learning a linear compatibility
 	\subsubsection{Dense Network}
 	 Once the GAN is trained on set $M$, we can generate now the feature instance for unseen classes. Now we have synthetic data for unseen classes denoted by 
 	$U=\{(\bar{x},u,c(u))\}$. Finally we have feature instances for seen and unseen classes without using images of unseen classes. Next step is to learn the mapping from input feature space to corresponding label space. For this we are using dense neural network with loss function,
-	$Loss_{dense}=\norm{\hat{c}(y)-c(y)}_2,$
+	\eq{Loss_{dense}=\norm{\hat{c}(y)-c(y)}_2,}
 	where $\hat{c}(y)$ is the estimate of $c(y)$ at the output layer of dense network. 
 	%With this learned dense network we are actually try to find the connection between to two different spaces which is further helpful in assigning labels during test phase.
 	
@@ -188,7 +188,7 @@ approach in ZSL for learning this mapping, is by learning a linear compatibility
 	\section{Experimental Setup and Evaluation criteria}
 	For experiments we are using MLCC data containing $7$ defects classes. Out of $7$ classes we are using $4$ seen classes and $3$ unseen classes. Each class contain images of size $200 \times 128$. For evaluation first we calculate the average accuracy of each unseen class and the taking the average for all unseen classes this evaluation criteria is usually called Top-1 accuracy~\cite{scott2016CVPR}. For class embedding we are using Word2vec and word base CNN-RNN architecture from~\cite{scott2016CVPR}.
 	\section{conclusion}
-	 In zero-shot learning we are providing the side information to generate the feature instances for unssen classes. Combination of GAN and dense network is used for training phase. During test phase, we are using nearest neighbor algorithm for assigning class labels. Finally, experiments are performed on MLCC data set.
+	 In zero-shot learning we are providing the side information to generate the feature instances for unseen classes. Combination of GAN and dense network is used for training phase. During test phase, we are using nearest neighbor algorithm for assigning class labels. Finally, experiments are performed on MLCC data set.
 		
 %		For application respect, there are various ongoing projects at Samsung, where one needs to classify images depending on the type of defects available in image data. As of now, one needs to re-train their model, whenever Samsung obtains images for the new unseen classes. Zero-shot learning is a useful technique to reduce the manual efforts require for re-training. One just needs to obtain the label attribute vectors for images of unseen classes. 
 %	Feature representations can be created for such data, with pre-trained model and ultimately label mapping can help to correctly classify such data.

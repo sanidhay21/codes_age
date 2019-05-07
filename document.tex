@@ -123,7 +123,7 @@
 
 	\maketitle 
 	\begin{abstract} 
-		Zero-shot learning consists of classifying the objects of unseen classes which were not present during training. In this, objects of each class are first map to the semantic feature embedding space. Many sophisticated approaches have been studied in literature for doing this mapping. We are providing an unsupervised way of learning this mapping using auto-encoder architecture in deep learning. Further, for each class, we are converting the class label into a vector containing the set of attributes describing fundamental properties required for the identification of particular class. In last, for assigning the class label for seen and unseen classes in test dataset we are using combination of clustering and nearest neighbor algorithms from machine learning. Clustering is used to avoid brute-force approach for comparing the semantic feature embedding of an object with all attribute vectors of class labels. This approach shown to be outperform the existing comparison methods like $1$-Nearest Neighbor.
+		Zero-shot learning consists of classifying the objects of unseen classes which were not present during training. In this, objects of each class are first map to the semantic feature embedding space. Many sophisticated approaches have been studied in literature for doing this mapping. We are providing an unsupervised way of learning this mapping using auto-encoder architecture in deep learning. Further, for each class, we are converting the class label into a class embedding containing the set of attributes describing fundamental properties required for the identification of particular class. In last, for assigning the class label for seen and unseen classes in test dataset we are using combination of clustering and nearest neighbor algorithms from machine learning. Clustering is used to avoid brute-force approach for comparing the semantic class embedding of an query object with all unseen class embedding from label space. This approach shown to be outperform the existing comparison methods like $1$-Nearest Neighbor.
 		
 		
 	\end{abstract}
@@ -135,8 +135,8 @@
 	
 	Zero-shot learning is typically a two phase process which are described below,
 	\begin{enumerate}
-		\item Training: In training phase, model learns the mapping of a class object into semantic feature embedding space.
-		\item Assigning Class Label: The label is assigned based on the object semantic embedding and the attribute vector of class.
+		\item Training: In training phase, model learns the mapping from input feature space to label space.
+		\item Assigning Class Label: In this first the nearest neighbor algorithm is applied between the query image class embedding and the class embeddings of unseen classes. After that, label associated with nearest class embedding is assigned to the query image.
 	\end{enumerate}
 	Several recent papers have proposed methods for mapping objects particularly images into semantic embedding space~\cite{frome2013devise,lake2011one}. In contrast, we are learning this mapping in unsupervised way using auto-encoder.
 	\subsection{Related Work}
@@ -145,7 +145,7 @@
 	neighbor class is assigned~\cite{wang2016relational,socher2013zero}. The most known
 	approach in zero-shot learning for learning this mapping, is by learning a linear compatibility between the visual and semantic space~\cite{frome2013devise}.
 	\subsection{Main Contribution}
-	We consider the situation where unseen classes are present in test dataset. Zero-shot learning is the way to deal such practical and potential situation. We are providing a novel unsupervised way of learning object mapping of a particular class to semantic feature embedding space. From deep learning, we are using auto-encoder architecture to learn such mapping. Finally, for assigning class label we are using combination of sophisticated machine learning algorithm called clustering and nearest neighbor which compares the semantic embedding of an object to the attribute vector of the class. 
+	We consider the situation where unseen classes are present in test dataset. Zero-shot learning is the way to deal such practical and potential situation. We are providing a novel unsupervised way of learning object mapping of a particular class to semantic feature embedding space. From deep learning, we are using auto-encoder architecture to learn such mapping. The mapping from input feature space to label space is achieved by learning dense neural network. Finally, for assigning class label we are using combination of sophisticated machine learning algorithm called clustering and nearest neighbor which compares the semantic embedding of an object to the attribute vector of the class. 
 	\section{System Architecture}
 	In this section, we are going to explain each component of the system architecture shown in Fig.~\ref{Fig:SystemModel}. The model of zero-short classifier $H$ first maps the input space $I$ into the semantic feature space $F^d$ of $d$ dimensions, using mapping $f$. Further, it  maps  the semantic feature embedding to the class label $Y$ using mapping $g$ i.e.,
 	$H=g(f(.)),
